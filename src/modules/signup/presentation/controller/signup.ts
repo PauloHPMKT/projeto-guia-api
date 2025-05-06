@@ -1,8 +1,12 @@
+import { AddSignUpModel } from "../../domain/models/add-signup";
+import { AddSignUp } from "../../domain/usecases/add-signup";
 import { MissingParamError } from "../errors/missing-param-error";
 import { HttpRequest, HttpResponse } from "../protocols/http";
 
 export class SignUpController {
-  handle(request: HttpRequest): HttpResponse {
+  constructor(private readonly addSignUp: AddSignUp) {}
+
+  handle(request: HttpRequest<AddSignUpModel.Params>): HttpResponse {
     const requiredFields = [
       "name",
       "email",
@@ -18,5 +22,13 @@ export class SignUpController {
         };
       }
     }
+
+    const { name, email, password, passwordConfirmation } = request.body;
+    this.addSignUp.add({
+      name,
+      email,
+      password,
+      passwordConfirmation,
+    });
   }
 }
