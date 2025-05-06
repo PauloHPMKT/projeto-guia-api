@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --passWithNoTests",
+    "test:stage": "jest --passWithNoTests",
     "prepare": "husky"
   },
   "keywords": [],
