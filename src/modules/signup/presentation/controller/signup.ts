@@ -1,15 +1,5 @@
-interface HttpRequest {
-  body?: any;
-  headers?: any;
-  params?: any;
-  query?: any;
-  file?: any;
-}
-
-interface HttpResponse {
-  statusCode: number;
-  body: any;
-}
+import { MissingParamError } from "../errors/missing-param-error";
+import { HttpRequest, HttpResponse } from "../protocols/http";
 
 export class SignUpController {
   handle(request: HttpRequest): HttpResponse {
@@ -24,7 +14,7 @@ export class SignUpController {
       if (!request.body[field]) {
         return {
           statusCode: 400,
-          body: new Error(`Missing param: ${field}`),
+          body: new MissingParamError(field),
         };
       }
     }
