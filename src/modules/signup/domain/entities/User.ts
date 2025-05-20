@@ -21,11 +21,3 @@ export class User {
     this.createdAt = params.createdAt ?? new Date();
   }
 }
-
-const user = new User({
-  name: "Lucas",
-  email: "LTest@test.com",
-  password: "12345678",
-  accountId: "asdasdasdasdasdasd",
-});
-console.log(user);
